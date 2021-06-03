@@ -1,0 +1,20 @@
+{
+  "name": "basic-linechart",
+  "version": "0.9.0",
+  "peerDependencies": {
+    "@angular/common": "^12.0.3",
+    "@angular/core": "^12.0.3",
+    "d3": "^6.7.0",
+    "@types/d3": "^6.7.0"
+  },
+  "dependencies": {
+    "tslib": "^2.1.0"
+  },
+  "main": "bundles/basic-linechart.umd.js",
+  "module": "fesm2015/basic-linechart.js",
+  "es2015": "fesm2015/basic-linechart.js",
+  "esm2015": "esm2015/basic-linechart.js",
+  "fesm2015": "fesm2015/basic-linechart.js",
+  "typings": "basic-linechart.d.ts",
+  "sideEffects": false
+}
