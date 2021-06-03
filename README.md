@@ -2,6 +2,20 @@
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
 
+## Installation
+
+Run `npm install https://github.com/PROJET-TER-MITTON-PINARD/lib-basic-linechart#main` to install.
+Run `npm install d3` and `npm install @types/d3` to install pearDependencies.
+
+## How to use 
+
+In your app.module.ts, you must add BasicLinechartModule to imports of @NgModule. 
+
+In your app.compenent.html, you can add the component with it parameters :
+```
+<lib-basic-linechart [width] = "1200" [height]="200" [data]=data3></lib-basic-linechart>
+``` 
+
 ## Code scaffolding
 
 Run `ng generate component component-name --project basic-linechart` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project basic-linechart`.
