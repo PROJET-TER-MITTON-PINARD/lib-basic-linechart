@@ -11,8 +11,8 @@ export declare class DataService {
     dataExample7: Data[];
     constructor();
     private parse;
-    parseBool(s: string): number;
     generateData(label: string, color: string, style: "both" | "line" | "area", interpolation: "step" | "linear", f: (s: string) => number): Data;
+    parseBool(s: string): number;
     private generateExample;
     private getRandomInt;
     static ɵfac: i0.ɵɵFactoryDeclaration<DataService, never>;
