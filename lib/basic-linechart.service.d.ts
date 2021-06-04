@@ -1,6 +1,5 @@
 import { Data } from './basic-linechart.component';
 import * as i0 from "@angular/core";
-export declare function parseBool(s: string): number;
 export declare class DataService {
     private str;
     dataExample1: Data[];
@@ -12,6 +11,7 @@ export declare class DataService {
     dataExample7: Data[];
     constructor();
     private parse;
+    parseBool(s: string): number;
     generateData(label: string, color: string, style: "both" | "line" | "area", interpolation: "step" | "linear", f: (s: string) => number): Data;
     private generateExample;
     private getRandomInt;
