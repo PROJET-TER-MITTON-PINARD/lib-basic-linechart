@@ -32,7 +32,9 @@ No parameters are required.
 - Output ```(currenTimeChange): number``` to bind with a function in your app, to synchronize components currentTime 
 
 /!\ Don't mix dataset with different value's type (continuous, positive integer) in one component.
+
 /!\ Don't mix dataset with different range of timestamp in one component.
+
 /!\ Don't bind range on components that have dataset with diferrent ranges of timestamp
 
 ### Interface Data
