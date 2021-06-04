@@ -1,12 +1,8 @@
 import { Data } from './basic-linechart.component';
 import * as i0 from "@angular/core";
-export interface DATA<T> {
-    timestamp: number;
-    value: T;
-    sensorId: string;
-}
+export declare function parseBool(s: string): number;
 export declare class DataService {
-    str: string;
+    private str;
     dataExample1: Data[];
     dataExample2: Data[];
     dataExample3: Data[];
@@ -15,8 +11,9 @@ export declare class DataService {
     dataExample6: Data[];
     dataExample7: Data[];
     constructor();
-    parse<T>(str: string, sensorId: string, f: (s: string) => T): DATA<T>[];
-    private generateData;
+    private parse;
+    generateData(label: string, color: string, style: "both" | "line" | "area", interpolation: "step" | "linear", f: (s: string) => number): Data;
+    private generateExample;
     private getRandomInt;
     static ɵfac: i0.ɵɵFactoryDeclaration<DataService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<DataService>;

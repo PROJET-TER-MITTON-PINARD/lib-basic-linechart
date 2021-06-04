@@ -7,7 +7,6 @@ export interface Data {
     style: "line" | "area" | "both";
     interpolation: "linear" | "step";
 }
-export declare function parseBool(s: string): 1 | 0 | -1;
 export declare class BasicLinechartComponent implements OnInit {
     private renderer;
     width: number;
