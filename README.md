@@ -22,16 +22,18 @@ This package contains, a line-chart component and some data's examples to try it
 
 No parameters are required.
 
-- Input ```[data]: Data[]``` default value : [], data display in the component (interface Data specified in the next section)
+- Input ```[data]: Data[]``` default value : [], data displayed in the component (specified Data in the section below)
 - Input ```[width]: number``` default value : 900, width of the component
 - Input ```[height]: number``` default value : 200, height of the component
 - Input ```[domain]: [number,number]``` default value : [0,0], domain of value (only for continuous values)
 - Input ```[range]: [number,number]``` default value : [0,0], range of timestamp that we display in component 
 - Input ```[currenTime]: number``` default value : 0, timestamp for the current time line
-- Output ```(rangeChange)``` to bind with a funtion in app.component.ts 
-- Output ```(currenTimeChange)``` to bind with a funtion in app.component.ts 
+- Output ```(rangeChange): [number,number]``` to bind with a function in app.component.ts 
+- Output ```(currenTimeChange): number``` to bind with a function in app.component.ts 
 
 ### Interface Data
+
+Represents one dataset. You can add an array of dataset in the component.
 
 ```
 export interface Data {
