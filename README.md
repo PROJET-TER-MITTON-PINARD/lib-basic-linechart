@@ -28,8 +28,12 @@ No parameters are required.
 - Input ```[domain]: [number,number]``` default value : [0,0], domain of value (only for continuous values)
 - Input ```[range]: [number,number]``` default value : [0,0], range of timestamp that we display in component 
 - Input ```[currenTime]: number``` default value : 0, timestamp for the current time line
-- Output ```(rangeChange): [number,number]``` to bind with a function in app.component.ts 
-- Output ```(currenTimeChange): number``` to bind with a function in app.component.ts 
+- Output ```(rangeChange): [number,number]``` to bind with a function in your app, to synchronize components ranges 
+- Output ```(currenTimeChange): number``` to bind with a function in your app, to synchronize components currentTime 
+
+/!\ Don't mix dataset with different value's type (continuous, positive integer) in one component.
+/!\ Don't mix dataset with different range of timestamp in one component.
+/!\ Don't bind range on components that have dataset with diferrent ranges of timestamp
 
 ### Interface Data
 
