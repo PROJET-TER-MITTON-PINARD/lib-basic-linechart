@@ -4,22 +4,25 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Installation
 
-Run `npm install https://github.com/PROJET-TER-MITTON-PINARD/lib-basic-linechart#main` to install.
+- Run `npm install https://github.com/PROJET-TER-MITTON-PINARD/lib-basic-linechart#main` to install.
 
-Run `npm install d3` and `npm install @types/d3` to install pearDependencies.
+- Run `npm install d3` and `npm install @types/d3` to install pearDependencies.
+
+## Summary 
+
+This package contains, a line-chart component and some data's examples to try it.
 
 ## How to use 
 
-In your app.module.ts, you must add ```BasicLinechartModule``` to imports of ```@NgModule```. 
+- In your app.module.ts, you must add ```BasicLinechartModule``` to imports of ```@NgModule```. 
 
-In your app.compenent.html, you can add the component with it parameters :
+- In your app.compenent.html, you can add the component : ```<lib-basic-linechart></lib-basic-linechart>```
 
-```<lib-basic-linechart [data]=data3 [width]="1200" [height]="200" [range]=range (rangeChange)="updateRange($event)" [currentTime]=currentTime (currentTimeChange)="updateCurrentTime($event)"  [domain]=[0,30]></lib-basic-linechart>```
+### Parameters of the component
 
-### Parameters  
- 
-All parameters are optionnal :
-- Input ```[data]: Data[]``` default value : [], data display in the component 
+No parameters are required.
+
+- Input ```[data]: Data[]``` default value : [], data display in the component (interface Data specified in the next section)
 - Input ```[width]: number``` default value : 900, width of the component
 - Input ```[height]: number``` default value : 200, height of the component
 - Input ```[domain]: [number,number]``` default value : [0,0], domain of value (only for continuous values)
@@ -28,16 +31,29 @@ All parameters are optionnal :
 - Output ```(rangeChange)``` to bind with a funtion in app.component.ts 
 - Output ```(currenTimeChange)``` to bind with a funtion in app.component.ts 
 
+### Interface Data
+
+```
+export interface Data {
+  label: string;
+  values: [number,number][]; //[timestamp,value]
+  color: string;
+  style: "line" | "area" | "both";
+  interpolation: "linear" | "step";
+}
+```
+
 ### DataService
 
-Contains dataExamples.
+Contains dataExamples. You can import them to test the component (show in the example below).
 
 ## Example 
 
 ### app.component.ts
 
+Write in the main class :
 ```
-public data1:Data[]=[];
+  public data1:Data[]=[];
   public data2:Data[]=[];
   public data3:Data[]=[];
   public data4:Data[]=[];
@@ -74,6 +90,7 @@ public data1:Data[]=[];
 
 ### app.component.html
 
+Write :
 ```
 <lib-basic-linechart [data]=data2 [range]=range (rangeChange)="updateRange($event)" [currentTime]=currentTime (currentTimeChange)="updateCurrentTime($event)"></lib-basic-linechart>
 <lib-basic-linechart [data]=data1 [domain]=[0,30] [range]=range (rangeChange)="updateRange($event)" [currentTime]=currentTime (currentTimeChange)="updateCurrentTime($event)"></lib-basic-linechart>
