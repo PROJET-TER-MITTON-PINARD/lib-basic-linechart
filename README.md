@@ -16,7 +16,14 @@ Example on : <a href="https://projet-ter-mitton-pinard.github.io/" target="_blan
 
 ## Summary 
 
-This package contains, a line-chart component and some data's examples to try it.
+This package contains, a linechart component and some data's examples to try it.
+
+On the linechart component you can : 
+- zoom with ctrl+wheel
+- move the horizontal scrollbar, scroll the time
+- move the vertical current time line 
+
+You can synchronize the time range and the current time line on several components. 
 
 ## How to use 
 
