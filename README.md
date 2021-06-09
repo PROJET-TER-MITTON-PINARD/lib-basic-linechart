@@ -2,7 +2,11 @@
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
 
-Example on : <a href="https://projet-ter-mitton-pinard.github.io/"> https://projet-ter-mitton-pinard.github.io/</a>
+Example on : <a href="https://projet-ter-mitton-pinard.github.io/" target="_blank"> https://projet-ter-mitton-pinard.github.io/</a>
+
+### Patch 0.9.3 notes
+- Bug fix on : zoom and scrollbar
+- Delete file of data example because it was too heavy
 
 ## Installation
 
@@ -30,6 +34,7 @@ No parameters are required.
 - Input ```[domain]: [number,number]``` default value : [0,0], domain of value (only for continuous values)
 - Input ```[range]: [number,number]``` default value : [0,0], range of timestamp that we display in component 
 - Input ```[currenTime]: number``` default value : 0, timestamp for the current time line
+- Input ```[speedZoom]: number ]0;1]``` default value : 0.2   
 - Output ```(rangeChange): [number,number]``` to bind with a function in your app, to synchronize components ranges 
 - Output ```(currenTimeChange): number``` to bind with a function in your app, to synchronize components currentTime 
 
@@ -56,11 +61,17 @@ interface Data {
 
 Contains function parseBool that you can use in generateData for boolean value.
 
-Contains function generateData, which you can use to parse Data from a local dataset :
+Contains function generateData, which you can use to parse Data from a dataset str :
 ```
-public generateData(label:string, color:string, style: "both"|"line"|"area",interpolation: "step"|"linear", f: (s:string)=>number):Data
+public generateData(str:string, label:string, color:string, style: "both"|"line"|"area",interpolation: "step"|"linear", f: (s:string)=>number):Data
 ```
+
+/!\ str format example : 
+`"2016-07-25 15:47:24,459";"PC6";"OFF"
+"2016-07-25 19:47:24,459";"PC6";"ON"`
+
 /!\ Fill parameter f with parseBool or parseFloat
+
 
 Examples : 
 ```
@@ -68,7 +79,7 @@ generateData("PC6","#124568","both", "step",parseBool)
 generateData("Temperature_Salon", "purple", "line", "linear", parseFloat)
 ```
 
-Contains dataExamples(:Data[]). You can import them to test the component (show in the example below).
+Contains dataExamples :Data[]. You can import them to test the component (show in the example below).
 
 ## Example 
 
@@ -82,10 +93,11 @@ Write in the main class :
   public data4:Data[]=[];
   public data5:Data[]=[];
   public data6:Data[]=[];
-  public data7:Data[]=[];
   public datatest:Data[]=[];
   public range: [number, number] = [0,0];
   public currentTime : number =0;
+  public range2: [number, number] = [0,0];
+  public currentTime2 : number =0;
 
   constructor(data : DataService){
     this.data1=data.dataExample1;
@@ -94,7 +106,6 @@ Write in the main class :
     this.data4=data.dataExample4;
     this.data5=data.dataExample5;
     this.data6=data.dataExample6;
-    this.data7=data.dataExample7;
   }
   public updateRange(rangeChange: [number,number]){
     this.range=rangeChange;
@@ -103,11 +114,19 @@ Write in the main class :
   public updateCurrentTime(currentTimeChange: number ){
     this.currentTime=currentTimeChange;
   }
+
+  public updateRange2(rangeChange: [number,number]){
+    this.range2=rangeChange;
+  }
+
+  public updateCurrentTime2(currentTimeChange: number ){
+    this.currentTime2=currentTimeChange;
+  }
   
   public change(i: number){
-    if(i==1) this.datatest = this.data5;
-    if(i==2) this.datatest = this.data6;
-    if(i==3) this.datatest = this.data7;
+    if(i==1) this.datatest = this.data4;
+    if(i==2) this.datatest = this.data5;
+    if(i==3) this.datatest = this.data6;
   }
 ```
 
@@ -117,10 +136,10 @@ Write :
 ```
 <lib-basic-linechart [data]=data2 [range]=range (rangeChange)="updateRange($event)" [currentTime]=currentTime (currentTimeChange)="updateCurrentTime($event)"></lib-basic-linechart>
 <lib-basic-linechart [data]=data1 [domain]=[0,30] [range]=range (rangeChange)="updateRange($event)" [currentTime]=currentTime (currentTimeChange)="updateCurrentTime($event)"></lib-basic-linechart>
-<lib-basic-linechart [data]=data4 [range]=range (rangeChange)="updateRange($event)" [currentTime]=currentTime (currentTimeChange)="updateCurrentTime($event)"></lib-basic-linechart>
 <lib-basic-linechart [width] = "1200" [height]="200" [data]=data3 [range]=range (rangeChange)="updateRange($event)" [currentTime]=currentTime (currentTimeChange)="updateCurrentTime($event)"></lib-basic-linechart>
-<lib-basic-linechart [data]=datatest [domain]=[0,30] [range]=range [currentTime]=currentTime> </lib-basic-linechart>
-<button (click)='change(1)'>Données 1</button>
-<button (click)='change(2)'>Données 2</button>
-<button (click)='change(3)' >Données 3</button>
+<lib-basic-linechart [speedZoom]=0.7 [data]=data4 [range]=range2 (rangeChange)="updateRange2($event)" [currentTime]=currentTime2 (currentTimeChange)="updateCurrentTime2($event)"></lib-basic-linechart>
+<lib-basic-linechart [speedZoom]=0.7 [data]=datatest [domain]=[26,27] [range]=range2 (rangeChange)="updateRange2($event)" [currentTime]=currentTime2 (currentTimeChange)="updateCurrentTime2($event)"></lib-basic-linechart>
+<button (click)='change(1)'>Data 4</button>
+<button (click)='change(2)'>Data 5</button>
+<button (click)='change(3)'>Data 6</button>
 ```

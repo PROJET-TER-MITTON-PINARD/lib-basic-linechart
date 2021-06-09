@@ -8,10 +8,9 @@ export declare class DataService {
     dataExample4: Data[];
     dataExample5: Data[];
     dataExample6: Data[];
-    dataExample7: Data[];
     constructor();
     private parse;
-    generateData(label: string, color: string, style: "both" | "line" | "area", interpolation: "step" | "linear", f: (s: string) => number): Data;
+    generateData(str: string, label: string, color: string, style: "both" | "line" | "area", interpolation: "step" | "linear", f: (s: string) => number): Data;
     parseBool(s: string): number;
     private generateExample;
     private getRandomInt;

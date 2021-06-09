@@ -13,9 +13,11 @@ export declare class BasicLinechartComponent implements OnInit {
     height: number;
     data: Data[];
     domain: [number, number];
+    speedZoom: number;
     timeline: ElementRef;
     scrollbar: ElementRef;
     zoneScrollbar: ElementRef;
+    compo: ElementRef;
     range: [number, number];
     rangeChange: EventEmitter<[number, number]>;
     currentTime: number;
@@ -40,6 +42,9 @@ export declare class BasicLinechartComponent implements OnInit {
     private currentTimeSelected;
     private scrollbarSelected;
     private lastPos;
+    private zoomSelected;
+    handleKeyDown(event: KeyboardEvent): void;
+    handleKeyUp(): void;
     constructor(renderer: Renderer2);
     /**
      * Copy data in dataZoom, and build title
@@ -174,6 +179,10 @@ export declare class BasicLinechartComponent implements OnInit {
      */
     private controlColor;
     /**
+     * Control the speedZoom if it isn't between 0 and 1.
+     */
+    private controlSpeedZoom;
+    /**
      * Determine the minimum or maximum of the horizontal or vertical axis in data
      * @param {Data[]} data Array of Data
      * @param {"xMin" | "xMax" | "yMin" | "yMax"} s precise wihch scale we want
@@ -194,5 +203,5 @@ export declare class BasicLinechartComponent implements OnInit {
      */
     private roundDecimal;
     static ɵfac: i0.ɵɵFactoryDeclaration<BasicLinechartComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<BasicLinechartComponent, "lib-basic-linechart", never, { "width": "width"; "height": "height"; "data": "data"; "domain": "domain"; "range": "range"; "currentTime": "currentTime"; }, { "rangeChange": "rangeChange"; "currentTimeChange": "currentTimeChange"; }, never, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<BasicLinechartComponent, "lib-basic-linechart", never, { "width": "width"; "height": "height"; "data": "data"; "domain": "domain"; "speedZoom": "speedZoom"; "range": "range"; "currentTime": "currentTime"; }, { "rangeChange": "rangeChange"; "currentTimeChange": "currentTimeChange"; }, never, never>;
 }
