@@ -2,8 +2,18 @@ import * as i0 from '@angular/core';
 import { Injectable, EventEmitter, Component, Input, ViewChild, Output, HostListener, NgModule } from '@angular/core';
 import * as d3 from 'd3';
 
+/**
+ * Service that give 6 example of dataset and function to parse DATA and Data from string.
+ */
 class DataService {
+    /**
+     * Constructor
+     * Launch generateExample with parameters this.str to fill all Dataset
+     */
     constructor() {
+        /**
+         * str is an example of data's string
+         */
         this.str = `  
   "2016-07-25 15:47:24,459";"PC6";"OFF"
   "2016-07-25 19:47:24,459";"PC6";"ON"
@@ -59,15 +69,43 @@ class DataService {
   "2016-07-25 16:39:50,128";"PC3";"OFF"
   "2016-07-25 16:44:50,065";"PC3";"ON"
   `;
+        /**
+         * Dataset 1
+         */
         this.dataExample1 = [];
+        /**
+         * Dataset 2
+         */
         this.dataExample2 = [];
+        /**
+         * Dataset 3
+         */
         this.dataExample3 = [];
+        /**
+         * Dataset 4
+         */
         this.dataExample4 = [];
+        /**
+         * Dataset 5
+         */
         this.dataExample5 = [];
+        /**
+         * Dataset 6
+         */
         this.dataExample6 = [];
         this.generateExample(this.str);
     }
+    /**
+     * Parse of str to obtain DATA[]
+     * @param str
+     * @param sensorId
+     * @param f
+     * @returns DATA[]
+     */
     parse(str, sensorId, f) {
+        /**
+         * Const to parse DATA
+         */
         const L = str.trim().split("\n").map(s => s.trim()).filter(s => s !== "")
             .map(s => s.split(";").map(s => s.slice(1, -1)))
             .filter(tab => tab[1] === sensorId)
@@ -78,6 +116,16 @@ class DataService {
         }));
         return L;
     }
+    /**
+     * Parse of str to obtain Data[]
+     * @param str
+     * @param label
+     * @param color
+     * @param style
+     * @param interpolation
+     * @param f
+     * @returns Data[]
+     */
     generateData(str, label, color, style, interpolation, f) {
         let d = this.parse(str, label, f);
         let v = [];
@@ -91,6 +139,11 @@ class DataService {
         };
         return da;
     }
+    /**
+     * Transform string in number
+     * @param s
+     * @returns 1 if s=='ON', 0 if s=='OFF' else -1
+     */
     parseBool(s) {
         if (s == 'ON')
             return 1;
@@ -99,6 +152,10 @@ class DataService {
         else
             return -1;
     }
+    /**
+     * Generate all dataset
+     * @param str
+     */
     generateExample(str) {
         let d2 = this.parse(str, "PC5", this.parseBool);
         let v2 = [];
@@ -123,6 +180,11 @@ class DataService {
         this.dataExample5.push(this.generateData(str, "Temperature_Cuisine", "gold", "line", "step", parseFloat));
         this.dataExample6.push(this.generateData(str, "PC3", "green", "both", "step", this.parseBool));
     }
+    /**
+     * Get +1 or -1 on the param x
+     * @param x
+     * @returns x+1 or x-1 (random)
+     */
     getRandomInt(x) {
         let alea;
         if (x == 0) {
@@ -149,35 +211,131 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.0.3", ngImpor
         }], ctorParameters: function () { return []; } });
 
 class BasicLinechartComponent {
+    /**
+     * Constructor : Init renderer
+     * @param renderer
+     */
     constructor(renderer) {
         this.renderer = renderer;
+        /**
+         * Input width of the component
+         * Default value : 900
+         */
         this.width = 900;
+        /**
+         * Input height of the compenent
+         * Default value : 200
+         */
         this.height = 200;
+        /**
+         * Input data array that the component display
+         * Default value : []
+         */
         this.data = [];
+        /**
+         * Input domain of the Axis Y
+         * Works only for continuous values
+         * Default value : [0,0]
+         */
         this.domain = [0, 0];
+        /**
+         * Input speed of zoom between 0 and 1
+         * Default value : 0.2
+         */
         this.speedZoom = 0.2;
+        /**
+         * Input range of timestamp
+         * Default value : [0,0]
+         */
         this.range = [0, 0];
+        /**
+         * Output rangeChange that emit range
+         */
         this.rangeChange = new EventEmitter();
+        /**
+         * Input currentTime
+         * Default value : 0
+         */
         this.currentTime = 0;
+        /**
+         * Output currentTimeChange that emit currentTime
+         */
         this.currentTimeChange = new EventEmitter();
+        /**
+         * Title of the component
+         */
         this.title = 'Timeline : ';
-        this.margin = { top: 20, right: 20, bottom: 20, left: 20 }; //marge interne au svg 
+        /**
+         * Margin of the component
+         */
+        this.margin = { top: 20, right: 20, bottom: 20, left: 50 }; //marge interne au svg 
+        /**
+         * dataZoom is a copy of data with the range specify
+         */
         this.dataZoom = [];
+        /**
+         * idZoom is the number of wheel notch
+         */
         this.idZoom = 0;
+        /**
+         * It's the smallest timestamp of data
+         */
         this.minTime = 0;
+        /**
+         * It's the biggest timestamp of data
+         */
         this.maxTime = 0;
+        /**
+         * It's the difference between the smallest and the biggest
+         */
         this.lengthTime = 0;
+        /**
+         * Width of the svg
+         */
         this.svgWidth = 0;
+        /**
+         * Height of the svg
+         */
         this.svgHeight = 0;
+        /**
+         * Scale of the X axis
+         */
         this.scaleX = d3.scaleTime();
+        /**
+         * Scale of the Y axis
+         */
         this.scaleY = d3.scaleLinear();
+        /**
+         * Array of area definition
+         */
         this.area = [];
+        /**
+         * Array of line definition
+         */
         this.line = [];
+        /**
+         * data length before the new change
+         */
         this.lastDatalength = 0;
+        /**
+         * Mode of the tooltip
+         */
         this.modeToolTips = "normal";
+        /**
+         * true if the currentTimeline is selected
+         */
         this.currentTimeSelected = false;
+        /**
+         * true if the scrollbar is selected
+         */
         this.scrollbarSelected = false;
+        /**
+         * Last position of the mouse
+         */
         this.lastPos = 0;
+        /**
+         * true if the CTRL Key of keyBoard is push
+         */
         this.zoomSelected = false;
     }
     handleKeyDown(event) {
@@ -481,9 +639,8 @@ class BasicLinechartComponent {
         this.compo.nativeElement.style.width = this.svgWidth + this.margin.left + "px";
         this.compo.nativeElement.style.padding = "10px 10px 10px 10px";
         this.renderer.listen(this.scrollbar.nativeElement, 'mousedown', (event) => this.activeScrollbar(event));
-        this.renderer.listen(this.compo.nativeElement, 'mouseleave', () => this.desactiveScrollbar());
-        this.renderer.listen(this.compo.nativeElement, 'mouseup', () => this.desactiveScrollbar());
-        this.renderer.listen(this.compo.nativeElement, 'mousemove', (event) => this.updateRange(event));
+        this.renderer.listen(window, 'mouseup', () => this.desactiveScrollbar());
+        this.renderer.listen(window, 'mousemove', (event) => this.updateRange(event));
     }
     /**
      * Update all the line chart (horizontal and vertical axis and scale, data, lines and range) on data changes.

@@ -10,7 +10,7 @@ Example on : <a href="https://projet-ter-mitton-pinard.github.io/" target="_blan
 
 ## Installation
 
-- Run `npm install https://github.com/PROJET-TER-MITTON-PINARD/lib-basic-linechart#main` to install.
+- Run `npm install https://github.com/PROJET-TER-MITTON-PINARD/lib-basic-linechart#main` or `npm install basic-linechart` to install.
 
 - Run `npm install d3` and `npm install @types/d3` to install pearDependencies.
 
@@ -29,7 +29,10 @@ You can synchronize the time range and the current time line on several componen
 
 - In your app.module.ts, you must add ```BasicLinechartModule``` to imports of ```@NgModule```. 
 
-- In your app.compenent.html, you can add the component : ```<lib-basic-linechart></lib-basic-linechart>```
+- In your app.component.html, you can add the component : 
+```html
+<lib-basic-linechart></lib-basic-linechart>
+```
 
 ### Parameters of the component
 
@@ -49,12 +52,12 @@ No parameters are required.
 
 /!\ Don't mix dataset with different range of timestamp in one component.
 
-/!\ Don't bind range on components that have dataset with diferrent ranges of timestamp
+/!\ Don't bind range on components that have dataset with different ranges of timestamp
 
 ### Interface Data
 
 Represents one dataset. You can add an array of dataset in the component.
-```
+```JavaScript
 interface Data {
   label: string;
   values: [number,number][]; //[timestamp,value]
@@ -74,26 +77,28 @@ public generateData(str:string, label:string, color:string, style: "both"|"line"
 ```
 
 /!\ str format example : 
+```JavaScript
 `"2016-07-25 15:47:24,459";"PC6";"OFF"
 "2016-07-25 19:47:24,459";"PC6";"ON"`
+```
 
 /!\ Fill parameter f with parseBool or parseFloat
 
 
 Examples : 
-```
+```Javascript
 generateData("PC6","#124568","both", "step",parseBool)
 generateData("Temperature_Salon", "purple", "line", "linear", parseFloat)
 ```
 
-Contains dataExamples :Data[]. You can import them to test the component (show in the example below).
+Contains dataExamples : Data[]. You can import them to test the component (show in the example below).
 
 ## Example 
 
 ### app.component.ts
 
 Write in the main class :
-```
+```JavaScript
   public data1:Data[]=[];
   public data2:Data[]=[];
   public data3:Data[]=[];
@@ -140,7 +145,7 @@ Write in the main class :
 ### app.component.html
 
 Write :
-```
+```html
 <lib-basic-linechart [data]=data2 [range]=range (rangeChange)="updateRange($event)" [currentTime]=currentTime (currentTimeChange)="updateCurrentTime($event)"></lib-basic-linechart>
 <lib-basic-linechart [data]=data1 [domain]=[0,30] [range]=range (rangeChange)="updateRange($event)" [currentTime]=currentTime (currentTimeChange)="updateCurrentTime($event)"></lib-basic-linechart>
 <lib-basic-linechart [width] = "1200" [height]="200" [data]=data3 [range]=range (rangeChange)="updateRange($event)" [currentTime]=currentTime (currentTimeChange)="updateCurrentTime($event)"></lib-basic-linechart>

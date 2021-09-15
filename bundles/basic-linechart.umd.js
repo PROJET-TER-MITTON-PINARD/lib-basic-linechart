@@ -339,18 +339,56 @@
         return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
     }
 
+    /**
+     * Service that give 6 example of dataset and function to parse DATA and Data from string.
+     */
     var DataService = /** @class */ (function () {
+        /**
+         * Constructor
+         * Launch generateExample with parameters this.str to fill all Dataset
+         */
         function DataService() {
+            /**
+             * str is an example of data's string
+             */
             this.str = "  \n  \"2016-07-25 15:47:24,459\";\"PC6\";\"OFF\"\n  \"2016-07-25 19:47:24,459\";\"PC6\";\"ON\"\n  \"2016-07-26 05:47:24,459\";\"PC6\";\"OFF\"\n  \"2016-07-26 06:47:24,459\";\"PC6\";\"ON\"\n  \"2016-07-26 06:59:24,459\";\"PC6\";\"OFF\"\n  \"2016-07-26 18:21:24,459\";\"PC6\";\"ON\"\n  \"2016-07-27 11:00:24,459\";\"PC6\";\"OFF\"\n  \"2016-07-28 08:32:24,459\";\"PC6\";\"ON\"\n  \"2016-07-28 18:15:24,459\";\"PC6\";\"OFF\"\n  \"2016-07-29 09:06:24,459\";\"PC6\";\"ON\"\n  \"2016-07-29 19:36:24,459\";\"PC6\";\"OFF\"\n  \"2016-07-25 15:47:24,459\";\"PC5\";\"OFF\"\n  \"2016-07-25 22:47:24,459\";\"PC5\";\"ON\"\n  \"2016-07-25 22:55:24,459\";\"PC5\";\"OFF\"\n  \"2016-07-26 07:29:24,459\";\"PC5\";\"ON\"\n  \"2016-07-26 20:59:24,459\";\"PC5\";\"OFF\"\n  \"2016-07-27 06:21:24,459\";\"PC5\";\"ON\"\n  \"2016-07-27 13:00:24,459\";\"PC5\";\"OFF\"\n  \"2016-07-28 06:32:24,459\";\"PC5\";\"ON\"\n  \"2016-07-28 14:15:24,459\";\"PC5\";\"OFF\"\n  \"2016-07-29 06:06:24,459\";\"PC5\";\"ON\"\n  \"2016-07-29 19:36:24,459\";\"PC5\";\"OFF\"\n  \"2016-07-25 15:47:19,423\";\"Temperature_Cuisine\";\"26.7\"\n  \"2016-07-25 15:48:20,279\";\"Temperature_Cuisine\";\"26.740000000000002\"\n  \"2016-07-25 15:50:00,776\";\"Temperature_Cuisine\";\"26.76\"\n  \"2016-07-25 15:55:00,275\";\"Temperature_Cuisine\";\"26.72\"\n  \"2016-07-25 16:10:00,202\";\"Temperature_Cuisine\";\"26.68\"\n  \"2016-07-25 16:15:00,197\";\"Temperature_Cuisine\";\"26.64\"\n  \"2016-07-25 16:24:50,493\";\"Temperature_Cuisine\";\"26.560000000000002\"\n  \"2016-07-25 16:29:50,204\";\"Temperature_Cuisine\";\"26.5\"\n  \"2016-07-25 16:34:50,177\";\"Temperature_Cuisine\";\"26.46\"\n  \"2016-07-25 16:39:50,128\";\"Temperature_Cuisine\";\"26.5\"\n  \"2016-07-25 16:44:50,065\";\"Temperature_Cuisine\";\"26.52\"\n  \"2016-07-25 15:47:19,423\";\"Temperature_Salon\";\"26.34\"\n  \"2016-07-25 15:48:05,264\";\"Temperature_Salon\";\"26.38\"\n  \"2016-07-25 15:53:05,275\";\"Temperature_Salon\";\"26.36\"\n  \"2016-07-25 15:58:05,252\";\"Temperature_Salon\";\"26.34\"\n  \"2016-07-25 16:08:05,234\";\"Temperature_Salon\";\"26.32\"\n  \"2016-07-25 16:13:05,237\";\"Temperature_Salon\";\"26.28\"\n  \"2016-07-25 16:23:05,172\";\"Temperature_Salon\";\"26.22\"\n  \"2016-07-25 16:28:05,244\";\"Temperature_Salon\";\"26.16\"\n  \"2016-07-25 16:29:55,490\";\"Temperature_Salon\";\"26.14\"\n  \"2016-07-25 15:47:19,423\";\"PC3\";\"ON\"\n  \"2016-07-25 15:48:20,279\";\"PC3\";\"OFF\"\n  \"2016-07-25 15:50:00,776\";\"PC3\";\"ON\"\n  \"2016-07-25 15:55:00,275\";\"PC3\";\"OFF\"\n  \"2016-07-25 16:10:00,202\";\"PC3\";\"ON\"\n  \"2016-07-25 16:15:00,197\";\"PC3\";\"OFF\"\n  \"2016-07-25 16:24:50,493\";\"PC3\";\"ON\"\n  \"2016-07-25 16:29:50,204\";\"PC3\";\"OFF\"\n  \"2016-07-25 16:34:50,177\";\"PC3\";\"ON\"\n  \"2016-07-25 16:39:50,128\";\"PC3\";\"OFF\"\n  \"2016-07-25 16:44:50,065\";\"PC3\";\"ON\"\n  ";
+            /**
+             * Dataset 1
+             */
             this.dataExample1 = [];
+            /**
+             * Dataset 2
+             */
             this.dataExample2 = [];
+            /**
+             * Dataset 3
+             */
             this.dataExample3 = [];
+            /**
+             * Dataset 4
+             */
             this.dataExample4 = [];
+            /**
+             * Dataset 5
+             */
             this.dataExample5 = [];
+            /**
+             * Dataset 6
+             */
             this.dataExample6 = [];
             this.generateExample(this.str);
         }
+        /**
+         * Parse of str to obtain DATA[]
+         * @param str
+         * @param sensorId
+         * @param f
+         * @returns DATA[]
+         */
         DataService.prototype.parse = function (str, sensorId, f) {
+            /**
+             * Const to parse DATA
+             */
             var L = str.trim().split("\n").map(function (s) { return s.trim(); }).filter(function (s) { return s !== ""; })
                 .map(function (s) { return s.split(";").map(function (s) { return s.slice(1, -1); }); })
                 .filter(function (tab) { return tab[1] === sensorId; })
@@ -364,6 +402,16 @@
             });
             return L;
         };
+        /**
+         * Parse of str to obtain Data[]
+         * @param str
+         * @param label
+         * @param color
+         * @param style
+         * @param interpolation
+         * @param f
+         * @returns Data[]
+         */
         DataService.prototype.generateData = function (str, label, color, style, interpolation, f) {
             var d = this.parse(str, label, f);
             var v = [];
@@ -377,6 +425,11 @@
             };
             return da;
         };
+        /**
+         * Transform string in number
+         * @param s
+         * @returns 1 if s=='ON', 0 if s=='OFF' else -1
+         */
         DataService.prototype.parseBool = function (s) {
             if (s == 'ON')
                 return 1;
@@ -385,6 +438,10 @@
             else
                 return -1;
         };
+        /**
+         * Generate all dataset
+         * @param str
+         */
         DataService.prototype.generateExample = function (str) {
             var _this = this;
             var d2 = this.parse(str, "PC5", this.parseBool);
@@ -410,6 +467,11 @@
             this.dataExample5.push(this.generateData(str, "Temperature_Cuisine", "gold", "line", "step", parseFloat));
             this.dataExample6.push(this.generateData(str, "PC3", "green", "both", "step", this.parseBool));
         };
+        /**
+         * Get +1 or -1 on the param x
+         * @param x
+         * @returns x+1 or x-1 (random)
+         */
         DataService.prototype.getRandomInt = function (x) {
             var alea;
             if (x == 0) {
@@ -437,35 +499,131 @@
             }], ctorParameters: function () { return []; } });
 
     var BasicLinechartComponent = /** @class */ (function () {
+        /**
+         * Constructor : Init renderer
+         * @param renderer
+         */
         function BasicLinechartComponent(renderer) {
             this.renderer = renderer;
+            /**
+             * Input width of the component
+             * Default value : 900
+             */
             this.width = 900;
+            /**
+             * Input height of the compenent
+             * Default value : 200
+             */
             this.height = 200;
+            /**
+             * Input data array that the component display
+             * Default value : []
+             */
             this.data = [];
+            /**
+             * Input domain of the Axis Y
+             * Works only for continuous values
+             * Default value : [0,0]
+             */
             this.domain = [0, 0];
+            /**
+             * Input speed of zoom between 0 and 1
+             * Default value : 0.2
+             */
             this.speedZoom = 0.2;
+            /**
+             * Input range of timestamp
+             * Default value : [0,0]
+             */
             this.range = [0, 0];
+            /**
+             * Output rangeChange that emit range
+             */
             this.rangeChange = new i0.EventEmitter();
+            /**
+             * Input currentTime
+             * Default value : 0
+             */
             this.currentTime = 0;
+            /**
+             * Output currentTimeChange that emit currentTime
+             */
             this.currentTimeChange = new i0.EventEmitter();
+            /**
+             * Title of the component
+             */
             this.title = 'Timeline : ';
-            this.margin = { top: 20, right: 20, bottom: 20, left: 20 }; //marge interne au svg 
+            /**
+             * Margin of the component
+             */
+            this.margin = { top: 20, right: 20, bottom: 20, left: 50 }; //marge interne au svg 
+            /**
+             * dataZoom is a copy of data with the range specify
+             */
             this.dataZoom = [];
+            /**
+             * idZoom is the number of wheel notch
+             */
             this.idZoom = 0;
+            /**
+             * It's the smallest timestamp of data
+             */
             this.minTime = 0;
+            /**
+             * It's the biggest timestamp of data
+             */
             this.maxTime = 0;
+            /**
+             * It's the difference between the smallest and the biggest
+             */
             this.lengthTime = 0;
+            /**
+             * Width of the svg
+             */
             this.svgWidth = 0;
+            /**
+             * Height of the svg
+             */
             this.svgHeight = 0;
+            /**
+             * Scale of the X axis
+             */
             this.scaleX = d3__namespace.scaleTime();
+            /**
+             * Scale of the Y axis
+             */
             this.scaleY = d3__namespace.scaleLinear();
+            /**
+             * Array of area definition
+             */
             this.area = [];
+            /**
+             * Array of line definition
+             */
             this.line = [];
+            /**
+             * data length before the new change
+             */
             this.lastDatalength = 0;
+            /**
+             * Mode of the tooltip
+             */
             this.modeToolTips = "normal";
+            /**
+             * true if the currentTimeline is selected
+             */
             this.currentTimeSelected = false;
+            /**
+             * true if the scrollbar is selected
+             */
             this.scrollbarSelected = false;
+            /**
+             * Last position of the mouse
+             */
             this.lastPos = 0;
+            /**
+             * true if the CTRL Key of keyBoard is push
+             */
             this.zoomSelected = false;
         }
         BasicLinechartComponent.prototype.handleKeyDown = function (event) {
@@ -779,9 +937,8 @@
             this.compo.nativeElement.style.width = this.svgWidth + this.margin.left + "px";
             this.compo.nativeElement.style.padding = "10px 10px 10px 10px";
             this.renderer.listen(this.scrollbar.nativeElement, 'mousedown', function (event) { return _this.activeScrollbar(event); });
-            this.renderer.listen(this.compo.nativeElement, 'mouseleave', function () { return _this.desactiveScrollbar(); });
-            this.renderer.listen(this.compo.nativeElement, 'mouseup', function () { return _this.desactiveScrollbar(); });
-            this.renderer.listen(this.compo.nativeElement, 'mousemove', function (event) { return _this.updateRange(event); });
+            this.renderer.listen(window, 'mouseup', function () { return _this.desactiveScrollbar(); });
+            this.renderer.listen(window, 'mousemove', function (event) { return _this.updateRange(event); });
         };
         /**
          * Update all the line chart (horizontal and vertical axis and scale, data, lines and range) on data changes.
