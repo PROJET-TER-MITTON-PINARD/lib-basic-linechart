@@ -1,6 +1,6 @@
 {
   "name": "basic-linechart",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "This package contains, a line-chart component and some data's examples to try it.",
   "author": "Cédric PINARD & Benjamin MITTON & Alexandre DEMEURE",
   "repository": {

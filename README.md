@@ -4,9 +4,9 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 Example on : <a href="https://projet-ter-mitton-pinard.github.io/" target="_blank"> https://projet-ter-mitton-pinard.github.io/</a>
 
-### Patch 0.9.3 notes
-- Bug fix on : zoom and scrollbar
-- Delete file of data example because it was too heavy
+### Patch 0.9.5 notes
+- Bug fix on scrollbar, now scroll it's possible on all the window.
+- Correction on the display of the labels of the y-axis. 
 
 ## Installation
 
